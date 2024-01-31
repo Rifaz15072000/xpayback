@@ -1,0 +1,336 @@
+task 9 Scripting
+
+learn the basics of bash
+Write scripts for below requirements
+To take dumps of all database regularly
+To start httpd or nginx service if it fails
+To resync one directory from one server to another 
+To do kernel updates monthly
+To take backup of domain files as tar daily
+Comparison of Bash to other automation languages. 
+
+learn the basics of bash
+-------------------------
+https://www.freecodecamp.org/news/bash-scripting-tutorial-linux-shell-script-and-command-line-for-beginners/
+
+https://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL_Intermediate.html#zz-5.3 ( link to learn scripting in mysql).
+
+install mysql and create a user
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
+mysql -u rifaz -p --- cmd to login as a root user
+https://www.digitalocean.com/community/tutorials/introduction-to-queries-mysql ( database creation birthdays)
+
+To take dumps of all database regularly
+----------------------------------------
+https://youtu.be/ElEw7cA2Ea8?si=fbT9QcKPCzPRtJrI (to crete a backup script)
+
+mysql>show databases;
+mysql> USE birthdays;
+Database changed
+mysql> SHOW TABLES;
++---------------------+
+| Tables_in_birthdays |
++---------------------+
+| dinners             |
+| tourneys            |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM dinners;
++---------+------------+---------+-------+-----------+
+| name    | birthdate  | entree  | side  | dessert   |
++---------+------------+---------+-------+-----------+
+| Dolly   | 1946-01-19 | steak   | salad | cake      |
+| Etta    | 1938-01-25 | chicken | fries | ice cream |
+| Irma    | 1941-02-18 | tofu    | fries | cake      |
+| Barbara | 1948-12-25 | tofu    | salad | ice cream |
+| Gladys  | 1944-05-28 | steak   | fries | ice cream |
++---------+------------+---------+-------+-----------+
+5 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------
+if ur encountering an error
+
+ubuntu@ip-172-31-18-141:/etc/backup$ ./mysql-backup.sh
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+mysqldump: Error: 'Access denied; you need (at least one of) the PROCESS privilege(s) for this operation' when trying to dump tablespaces
+mysqldump: Got error: 1044: Access denied for user 'rifaz'@'localhost' to database 'birthdays' when using LOCK TABLES
+ubuntu@ip-172-31-18-141:/etc/backup$ mysql -u root -p
+Enter password: 
+ERROR 1698 (28000): Access denied for user 'root'@'localhost'
+ubuntu@ip-172-31-18-141:/etc/backup$ sudo mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 33
+Server version: 8.0.35-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> GRANT PROCESS, LOCK TABLES ON *.* TO 'rifaz'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> EXIT;
+Bye
+ubuntu@ip-172-31-18-141:/etc/backup$ ./mysql-backup.sh
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+ubuntu@ip-172-31-18-141:/etc/backup$ ll
+total 20
+drwxr-xr-x  2 ubuntu ubuntu 4096 Jan 29 06:45 ./
+drwxr-xr-x 96 root   root   4096 Jan 29 06:36 ../
+-rw-rw-r--  1 ubuntu ubuntu  799 Jan 29 06:43 20240129_064312.sql
+-rw-rw-r--  1 ubuntu ubuntu 3027 Jan 29 06:45 20240129_064506.sql
+-rwxr-xr-x  1 ubuntu ubuntu  275 Jan 29 06:38 mysql-backup.sh*
+ubuntu@ip-172-31-18-141:/etc/backup$
+------------------------------------------------------------------------------------------------------------------------------------
+1) To take dumps of all database regularly
+---------------------------------------------
+#!/usr/bin/bash
+
+# MySQL database details
+DB_USER="rifaz"
+DB_PASSWORD="Rifaz@123"
+DB_NAME="birthdays"
+
+BACKUP_DIR="/etc/backup"
+timestamp=$(date +"%Y%m%d_%H%M%S")
+BACKUP_FILE="$BACKUP_DIR/$DB_NAME_$timestamp.sql"
+
+mysqldump -u $DB_USER -p$DB_PASSWORD $DB_NAME > $BACKUP_FILE
+
+if [ $? -eq 0 ]; then
+    echo "Database backup completed successfully. File: $BACKUP_FILE"
+
+    # Zip the backup file
+    ZIP_FILE="$BACKUP_DIR/$DB_NAME_$timestamp.zip"
+    zip $ZIP_FILE $BACKUP_FILE
+
+    # Remove the original SQL backup file to save space
+    rm $BACKUP_FILE
+
+    echo "Backup file zipped successfully. File: $ZIP_FILE"
+else
+    echo "Error: Database backup failed."
+fi
+
+-> https://www.google.com/search?q=write+a+shell+script+to+dump+mysql+database&rlz=1C1FKPE_enIN997IN997&oq=write+a+shell+script+to+dump+mysql+database&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg80gEHNDIwajBqN6gCALACAA&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:d3f160c2,vid:WjdbWDslCas,st:0
+
+-> crontab -e (cmd to set the backup file)
+0 2 * * * /path/to/backup_script.sh ( u can add this inside crontab * * * * * /path/ for backup data every minute)
+
+etc/backup/mysql-backup.sh
+-------------------------------------------------------------------------------------------------------------------------------------
+encrypt password
+----------------
+#!/bin/bash
+
+# Set the MySQL credentials
+DB_USER=""
+DB_NAME="birthdays"
+
+# Set the backup directory
+BACKUP_DIR="/etc/backup"
+
+# Set the date format for the backup file
+DATE_FORMAT=$(date +"%Y%m%d_%H%M%S")
+
+# Create a backup file
+BACKUP_FILE="$BACKUP_DIR/$DATE_FORMAT.sql"
+
+# Set the path for the encrypted password file
+ENCRYPTED_PASSWORD_FILE="/home/your_username/.encrypted_mysql_password"
+
+# Check if the encrypted password file exists
+if [ -f $ENCRYPTED_PASSWORD_FILE ]; then
+    # Decrypt the MySQL password
+    DB_PASSWORD=$(openssl enc -aes-256-cbc -d -in $ENCRYPTED_PASSWORD_FILE)
+else
+    echo "Error: Encrypted MySQL password file not found."
+    exit 1
+fi
+
+# Run mysqldump to create a backup using my.cnf
+mysqldump --defaults-extra-file=/home/your_username/.my.cnf $DB_USER:$DB_PASSWORD $DB_NAME > $BACKUP_FILE
+
+# Check if the backup was successful
+if [ $? -eq 0 ]; then
+    echo "Database backup completed successfully. File: $BACKUP_FILE"
+
+    # Zip the backup file if the zip command is available
+    if command -v zip &> /dev/null; then
+        ZIP_FILE="$BACKUP_DIR/$DATE_FORMAT.zip"
+        zip $ZIP_FILE $BACKUP_FILE
+        rm $BACKUP_FILE
+        echo "Backup file zipped successfully. File: $ZIP_FILE"
+    else
+        echo "Warning: zip command not found. Backup file was not zipped."
+    fi
+else
+    echo "Error: Database backup failed."
+fi
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+2)To start httpd or nginx service if it fails
+-----------------------------------------------
+https://youtu.be/pYD8Mm-xvgs?si=MZ2sBBj9wKHPIa_Z
+
+#!/usr/bin/bash
+
+# Check if Nginx is running
+if systemctl is-active --quiet nginx; then
+  echo "Nginx is running."
+else
+  # If Nginx is not running, start the service
+  echo "Nginx is not running. Starting Nginx..."
+  systemctl start nginx
+
+  # Check if the service started successfully
+  if [ $? -eq 0 ]; then
+    echo "Nginx started successfully."
+  else
+    echo "Failed to start Nginx."
+  fi
+fi
+-----------------------------
+chmod +x start_nginx.sh
+----------------------------
+./start_nginx.sh
+-----------------------------
+sudo cat /var/log/syslog | grep nginx.sh (this cmd is used to check if the service is working every 5 minutes).
+------------------------------------------------------------
+forr httpd
+-----------
+httpd_status=$(systemctl is-active httpd)
+
+if [ "$httpd_status" != "active" ]; then
+    # httpd is not running, attempt to start it
+    systemctl start httpd
+
+    # Check if the start was successful
+    if [ $? -eq 0 ]; then
+        echo "httpd started successfully."
+    else
+        echo "Failed to start httpd. Please check the Apache configuration."
+    fi
+else
+    echo "httpd is already running."
+fi
+---------------------------------------------------------------------------
+
+3) To resync one directory from one server to another 
+-------------------------------------------------------
+https://jumpcloud.com/blog/how-to-use-rsync-remote-backup-linux-system
+https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories
+https://www.cherryservers.com/blog/how-to-use-rsync-on-linux-to-synchronize-local-and-remote-directories
+
+-> first create to instances ubuntu and centos
+-> then install rsync refer http.
+-> then create file test.txt in /home/jumpcloud/data(in local server that is ubuntu) and then /home/user/backup(in remote server centos)
+-> add then add necessary read write permission for the file.
+-> then try ssh between ubuntu and centos both follow (to connect one ect to another this notpad).
+-> https://jumpcloud.com/blog/how-to-use-rsync-remote-backup-linux-system(use this to perform all the operations).
+-> in backup.sh add below lines
+    sudo rsync -avz -e "ssh -i /home/ubuntu/.ssh/id_rsa" /home/jumpcloud/data/ ec2-user@54.89.115.112:/home/user/backup
+->the do crontab -e
+
+------------------------------
+4)To do kernel updates monthly
+-------------------------------
+#!/bin/bash
+
+# Define the path to the log file
+LOG_FILE="/var/log/kernel_update.log"
+
+# Function to log messages
+log_message() {
+    echo "$(date +"%Y-%m-%d %H:%M:%S"): $1" >> "$LOG_FILE"
+}
+
+# Function to update the kernel
+update_kernel() {
+    # Update the package list
+    sudo apt update -y
+
+    # Upgrade all packages, including the kernel
+    sudo apt upgrade -y
+
+    # Remove old kernel packages (leaving the current and one previous version)
+    sudo apt autoremove --purge -y
+
+    # Log the update
+    log_message "Kernel updated successfully"
+}
+
+# Check if the script is run with sudo privileges
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run this script with sudo."
+    exit 1
+fi
+
+# Check if the log file exists, if not, create it
+if [ ! -e "$LOG_FILE" ]; then
+    touch "$LOG_FILE"
+fi
+
+# Log the start of the script
+log_message "Monthly Kernel Update Script started"
+
+# Perform the kernel update
+update_kernel
+
+# Log the end of the script
+log_message "Monthly Kernel Update Script completed"
+---------------------------------------------------------------
+
+5) To take backup of domain files as tar daily
+----------------------------------------------
+
+#!/usr/bin/bash
+
+# Set the source directory to the location of your domain files
+source_directory="/etc/nginx/sites-available/devops.xpayback.in"
+
+# Set the backup directory where the tarball will be stored
+backup_directory="/usr/local/src/backup"
+
+# Set the filename for the tarball with date stamp
+backup_filename="devops.xpayback.in_backup_$(date +%Y%m%d).tar.gz"
+
+# Check if the source directory exists
+if [ ! -d "$source_directory" ]; then
+    echo "Error: Source directory does not exist."
+    exit 1
+fi
+
+# Check if the backup directory exists; if not, create it
+if [ ! -d "$backup_directory" ]; then
+    mkdir -p "$backup_directory"
+fi
+
+# Create the tarball with compression
+tar -czvf "$backup_directory/$backup_filename" -C "$(dirname $source_directory)" "$(basename $source_directory)"
+
+# Check if the tar operation was successful
+if [ $? -eq 0 ]; then
+    echo "Backup completed successfully. Tarball saved to $backup_directory/$backup_filename"
+else
+    echo "Error: Backup failed."
+fi
+-------------------------------------------------------------------------------------------------------------------
+
+---
+Comparison of Bash to other automation languages.
+-------------------------------------------------
+https://betterprogramming.pub/bash-vs-python-vs-javascript-which-is-better-for-automation-92a277ef49e
+https://opensource.com/article/19/4/bash-vs-python
+
+
+

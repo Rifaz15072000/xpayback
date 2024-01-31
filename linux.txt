@@ -1,0 +1,223 @@
+task 3
+-------
+domain setup
+set up a test domain devops.xpayback.in on the ubuntu server using below stack LAMP and LEMP
+
+LAMP==linux,apache2,mysql,php
+LEMP==linux,nginx,mysql,php
+
+sites to refer:
+https://phoenixnap.com/kb/how-to-install-lamp-in-ubuntu
+https://www.liquidweb.com/kb/configure-apache-virtual-hosts-ubuntu-18-04/
+https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-18-04  (These can be checked for domain setup on LAMP)
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-22-04  (these can be checked for domain hosting insted of ip)
+
+
+Make sure you cover below topics by the completion
+1. Web server
+-----------
+==A web server is a software application or hardware device that stores, processes, and serves website content to users over the Internet. When you type a website's URL (Uniform Resource Locator) into a web browser, the browser sends a request to the web server hosting that website. The web server then processes the request, retrieves the requested web page or content, and sends it back to the user's browser, which displays the content on the screen.
+Common web server software includes Apache, Nginx, Microsoft Internet Information Services (IIS), and others. These servers can run on various operating systems such as Linux, Windows, or macOS. 
+
+2. Diff types of web servers and it's peculiarities
+--------------------------------------------------
+==Apache HTTP Server:
+-----------------
+Characteristics: Apache is one of the most widely used open-source web servers. It is known for its flexibility, reliability, and robust performance. Apache supports a variety of modules, allowing users to extend its functionality.
+Use Cases: Apache is commonly used for hosting static websites and dynamic web applications. It is often used in combination with the PHP programming language.
+
+Nginx (pronounced "engine-x"):
+----------------------------
+Characteristics: Nginx is a lightweight, high-performance web server and reverse proxy server. It is designed to handle a large number of concurrent connections efficiently. Nginx is known for its low memory usage and ability to serve static content quickly.
+
+Microsoft Internet Information Services (IIS):
+---------------------------------------------
+Characteristics: IIS is a web server developed by Microsoft for Windows Server environments. It integrates well with other Microsoft technologies and provides support for ASP.NET, Microsoft's server-side web application framework.
+
+LiteSpeed Web Server:
+---------------------
+Characteristics: LiteSpeed is a high-performance, commercial web server that aims to be a drop-in replacement for Apache while providing better performance. It includes features such as LiteSpeed Cache for optimizing dynamic content delivery.
+
+3. LAMP and LEMP setup - Apache working, main conf, log file loc etc etc. Same with Nginx
+------------------------------------------------------------------------------------------
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-22-04 (LAMP)
+https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-22-04 (Securing LAMP using certbot)
+https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal (Certbot offical link)
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-22-04(LEMP)
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04 (securing LEMP from http to https)
+
+4. Linux server administration - CLI
+------------------------------------
+https://youtu.be/72snZctFFtA?feature=shared (DNS Working)
+https://www.nublue.co.uk/guides/edit-hosts-file/#:~:text=In%20Windows%2010%20the%20hosts,select%20%E2%80%9CRun%20as%20Administrator%E2%80%9D (host file setup in pc).
+
+5. Learn the working of DNS, what are the types of DNS records.
+---------------------------------------------------------------
+https://www.cloudflare.com/learning/dns/what-is-dns/
+https://aws.amazon.com/route53/what-is-dns/#:~:text=The%20Internet's%20DNS%20system%20works,These%20requests%20are%20called%20queries.
+
+DNS, or Domain Name System, is a fundamental part of the internet that translates human-readable domain names into IP addresses. Computers and network devices communicate using IP addresses, which are numerical identifiers. DNS serves as a directory that allows users to access websites and other online resources using domain names, like www.example.com, instead of memorizing numeric IP addresses.
+There are several types of DNS records, each serving a specific purpose.
+-----------------------------------------------------------------------
+A (Address) Record:
+------------------
+Associates a domain name with an IPv4 address.
+
+AAAA (IPv6 Address) Record:
+---------------------------
+Similar to the A record but associates a domain name with an IPv6 address.
+
+CNAME (Canonical Name) Record:
+-----------------------------
+Maps an alias (subdomain) to the canonical (primary) domain name.
+
+MX (Mail Exchange) Record:
+-------------------------
+Specifies mail servers responsible for receiving email on behalf of a domain.
+
+NS (Name Server) Record:
+------------------------
+Indicates which DNS servers are authoritative for a domain.
+
+SOA (Start of Authority) Record:
+--------------------------------
+Contains information about the domain, including the primary DNS server, the email of the domain administrator, the domain's serial number, and timers for DNS data.
+
+TXT (Text) Record:
+-----------------
+Allows domain administrators to associate arbitrary text with a domain. Often used for verification or to provide information.
+
+SRV (Service) Record:
+---------------------
+Specifies information about available services within a domain.
+DNS operates in a hierarchical structure. At the top of the hierarchy are the root DNS servers, followed by Top-Level Domain (TLD) servers, authoritative DNS servers, and local DNS servers. When you enter a domain name in your browser, your device queries these DNS servers in a specific order to resolve the corresponding IP address.
+
+6. Learn what is registrar and how can we find out a domain's registrar?
+------------------------------------------------------------------------
+A domain registrar is a company or organization that manages the reservation and registration of domain names on the internet. These registrars are accredited by the Internet Corporation for Assigned Names and Numbers (ICANN) or by national authorities to provide domain registration services.
+   When you register a domain name, you essentially lease the rights to use that specific domain for a set period (usually annually). The registrar helps you secure the domain, provides DNS services, and ensures that the domain registration information is accurate and up-to-date.
+
+To find out the registrar of a domain, you can follow these steps:
+-----------------------------------------------------------------
+WHOIS Lookup:
+Registrar's Website:
+WHOIS Command in Terminal/Command Prompt:
+If you have access to a command line interface, you can use the WHOIS command to look up information about a domain. Open the terminal or command prompt and type:
+cmd === "whois domain.com"
+Replace "domain.com" with the actual domain you want to look up.
+
+7.What is host file and what's the need for it.
+-----------------------------------------------
+The "hosts" file is a plain text file on a computer that maps hostnames to IP addresses. It is an operating system file used to resolve human-readable domain names to numerical IP addresses. This file is present on most operating systems, including Windows, macOS, and Linux.
+Here's how it works:
+------------------
+Name Resolution:
+When you enter a domain name (e.g., www.example.com) into your web browser, the computer needs to convert that domain name into an IP address to locate the server on the internet.
+DNS Lookup:
+Normally, your computer performs a Domain Name System (DNS) lookup to find the IP address associated with the domain. It sends a request to a DNS server, which then provides the IP address.
+Hosts File:
+The hosts file allows you to manually specify IP address and hostname mappings locally on your computer. When you try to access a domain, your computer first checks its hosts file before querying external DNS servers.
+
+https://preview.afrihost.com/ (to bypass adding host entry)
+
+
+7. how can we load domain http://devops.xpayback.in/ on browser?
+---------------------------------------------------------------
+Scenario is
+We bought domain http://devops.xpayback.in from a registrar (like godday). We did setup the LAMP stack on the server. How can we make it work globally? So it's loading everywhere
+-----------------------------
+we can use WordPress.
+
+
+8. check what is CDN and it's use
+------------------------------------
+https://aws.amazon.com/what-is/cdn/#:~:text=A%20content%20delivery%20network%20(CDN,loading%20for%20data%2Dheavy%20applications.
+A content delivery network (CDN) is a network of interconnected servers that speeds up webpage loading for data-heavy applications. CDN can stand for content delivery network or content distribution network. When a user visits a website, data from that website's server has to travel across the internet to reach the user's computer. If the user is located far from that server, it will take a long time to load a large file, such as a video or website image. Instead, the website content is stored on CDN servers geographically closer to the users and reaches their computers much faster.
+
+https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html (Cloud front)
+
+9. what is cloudflare?
+---------------------
+https://www.youtube.com/watch?v=XHvmX3FhTwU
+https://www.cloudflare.com/learning/what-is-cloudflare/
+
+10. We can use online tools to verify SSL status, expiry etc. Renewing the SSL on time is necessay ! We have diff workarounds to that(letsencrypt).
+--------------------------------------------------------------------------------------------------------------------------------------------------
+https://www.sslshopper.com/ssl-checker.html (this is widley used tool for checking SSL)
+https://www.whatsmydns.net/ (This is used to DNS status checking)
+intodns.com
+https://www.ssllabs.com/ssltest/analyze.html?d=devops.xpayback.in
+https://crt.sh/?q=devops.xpayback.in
+
+11. .Install wordpress on the domain and make it work. You will need database setup for that. Learn the working. 
+-----------------------------------------------------------------------------------------------------------------
+https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-on-ubuntu-22-04 (installing)
+https://youtu.be/kYY88h5J86A?si=dxbJE0SXgZGgCjlw (working).
+https://youtu.be/rtJpnXOdHuo?si=R99lzgyjzSeni5TK(eding home page)
+
+https://devops.xpayback.in/wp-admin/(dashboard of wordpress).
+password:  P$(4UraUCy8ORNm)9k
+user name: Myuser
+
+12.Take dump of the database used for wordpress and keep it under /usr/local/src directory
+------------------------------------------------------------------------------------------
+root@ip-172-31-35-8:/var/www/devops.xpayback.in# grep DB wp-config.php 
+define( 'DB_NAME', 'wordpress' );
+define( 'DB_USER', 'wordpressuser' );
+define( 'DB_PASSWORD', 'Rifaz@123' );
+define( 'DB_HOST', 'localhost' );
+define( 'DB_CHARSET', 'utf8' );
+define( 'DB_COLLATE', '' );
+
+root@ip-172-31-35-8:/usr/local/src# mysqldump -u wordpressuser wordpress>wordpress.sql -p
+Enter password:
+
+root@ip-172-31-35-8:/usr/local/src# du -sch wordpress.sql 
+1.4M	wordpress.sql
+1.4M	total
+
+
+13. Learn how to manage disc space management on a linux host.
+--------------------------------------------------------------
+https://www.linkedin.com/advice/3/how-can-you-manage-disk-space-linux-server-svzye
+https://youtu.be/o-WPKXaiL7s?si=VWVnSjQyIgTLOym-
+https://www.diskspacemanagement.com/disk-space-management-on-unix-linux-systems/
+
+14. earn what is log monitoring
+--------------------------------
+Log monitoring refers to the practice of systematically reviewing, analyzing, and acting upon logs generated by various software applications, servers, network devices, and operating systems. Logs are records of events or activities that occur within a system, and they provide valuable insights into the health, performance, security, and operational aspects of the system.
+https://www.elastic.co/what-is/log-monitoring
+
+15. FTP
+------
+-> https://www.fortinet.com/resources/cyberglossary/file-transfer-protocol-ftp-meaning#:~:text=What%20is%20FTP%20(File%20Transfer,to%20communicate%20with%20each%20other.
+-> https://www.pureftpd.org/project/pure-ftpd/
+https://www.saashub.com/compare-vsftpd-vs-pure-ftpd(diff btw pure-ftpd and vsftpd).
+->https://www.digitalocean.com/community/tutorials/how-to-set-up-vsftpd-for-a-user-s-directory-on-ubuntu-20-04(ubuntu).
+-> https://youtu.be/XNjOSY-wcb0?si=d4Px249qBoDyGLDD
+-> https://youtu.be/XNjOSY-wcb0?si=VLgoR_5swQmy2UQw(use this to perform vsftpd).
+-> use File Zilla to use FTP server
+
+Jithin Xpayback: But the key point try to upload files, create files and download using any FTP client. . thats all
+Jithin Xpayback: The purpose is we'll be on bare servers mostly and needs to upload files using FTP. that's all. 
+We also have scp and others, FTP is standard service used. Cool
+
+to check ftp in CLI
+---------------------
+ftp> ls -la
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+drwxr-xr-x    2 1001     1001         4096 Jan 25 04:27 .
+dr-xr-xr-x    3 65534    65534        4096 Jan 25 04:26 ..
+-rw-r--r--    1 0        0              14 Jan 25 04:27 demo.txt
+226 Directory send OK.
+ftp> pwd
+Remote directory: /upload
+ftp>
+
+man pure-ftpd
+------------
+https://docs.google.com/document/d/126H7hx6djEqE0VX2S4d1Y_4C4rPVjbOcTRts14FUD-g/edit?usp=sharing
+
+
+

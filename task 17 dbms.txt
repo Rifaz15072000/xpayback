@@ -1,0 +1,121 @@
+Task 17
+understnd DBMS and learn basic query commands.
+
+1. Learn what is dbms, types of it. differences, versions.
+---------------------------------------------------------
+https://www.guru99.com/dbms-keys.html
+
+2. Install postgresl server and create a database and learn the basic commands - listing, dump commands, import etc. 
+--------------------------------------------------------------------------------------------------------------------
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-22-04
+->install pgsql
+for listing
+-------------
+use cmd === /dt
+
+====for backup on dump
+----------------------
+->use cmd --- sudo systemctl enable postgresql
+->sudo -i -u postgres
+->postgres@ip-172-31-24-122:~$ psql
+->postgres=# create user testuser with password '1234';
+CREATE ROLE
+postgres=# create database test;
+CREATE DATABASE
+postgres=# grant all privileges on database test to testuser;
+GRANT
+->postgres@ip-172-31-24-122:~$ exit
+->ubuntu@ip-172-31-24-122:~$ sudo -i -u postgres
+postgres@ip-172-31-24-122:~$ psql
+psql (14.10 (Ubuntu 14.10-0ubuntu0.22.04.1))
+Type "help" for help.
+used to list all databases.
+->postgres=# \l
+->postgres=# \q
+->create a dump file (->postgres@ip-172-31-24-122:~$ pg_dumpall >./backup.bak)
+->\l
+->psql
+->postgres=# drop database sammy;
+->\l
+->postgres=# \q
+->use this command to backup that deleted file(-> postgres@ip-172-31-24-122:~$ psql -f ./backup.bak postgres)
+->postgres@ip-172-31-24-122:~$ psql
+->postgres=# \l (u can now see the dump file has been restored.).
+
+
+import exporting etc..
+-------------------------
+create a databse:
+postgres=# CREATE TABLE books (
+    book_id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    publication_year INTEGER
+);
+CREATE TABLE
+postgres=# /dt
+postgres-# \dt
+         List of relations
+ Schema | Name  | Type  |  Owner   
+--------+-------+-------+----------
+ public | books | table | postgres
+(1 row)
+
+insert some records:
+postgres=# INSERT INTO books (title, author, publication_year) VALUES
+    ('The Great Gatsby', 'F. Scott Fitzgerald', 1925),
+    ('To Kill a Mockingbird', 'Harper Lee', 1960),
+    ('1984', 'George Orwell', 1949),
+    ('Pride and Prejudice', 'Jane Austen', 1813);
+INSERT 0 4
+postgres=# SELECT * FROM books;
+ book_id |         title         |       author        | publication_year 
+---------+-----------------------+---------------------+------------------
+       1 | The Great Gatsby      | F. Scott Fitzgerald |             1925
+       2 | To Kill a Mockingbird | Harper Lee          |             1960
+       3 | 1984                  | George Orwell       |             1949
+       4 | Pride and Prejudice   | Jane Austen         |             1813
+(4 rows)
+
+->postgres=# \q
+->postgres@ip-172-31-24-122:~$ pg_dump --no-owner postgres > dump.sql
+postgres@ip-172-31-24-122:~$ ls
+14  backup.bak  dump.sql
+postgres@ip-172-31-24-122:~$ cat dump.sql 
+->psql
+-> create an empty database:
+->postgres=# create database taskdbbackup;
+CREATE DATABASE
+postgres=# \l
+postgres=# \list
+postgres=# \q
+->postgres@ip-172-31-24-122:~$ psql taskdbbackup < dump.sql
+->psql
+->postgres=# \connect taskdbbackup;
+You are now connected to database "taskdbbackup" as user "postgres".
+taskdbbackup=# \dt
+         List of relations
+ Schema | Name  | Type  |  Owner
+--------+-------+-------+----------
+ public | books | table | postgres
+(1 row)
+
+->LINE 1: select * from tasks;
+                      ^
+taskdbbackup=# select * from books;
+ book_id |         title         |       author        | publication_year     
+---------+-----------------------+---------------------+------------------    
+       1 | The Great Gatsby      | F. Scott Fitzgerald |             1925     
+       2 | To Kill a Mockingbird | Harper Lee          |             1960     
+       3 | 1984                  | George Orwell       |             1949     
+       4 | Pride and Prejudice   | Jane Austen         |             1813     
+(4 rows)
+
+
+3. Learn what is mysql tuning and what is the need for it. 
+----------------------------------------------------------
+https://phoenixnap.com/kb/improve-mysql-performance-tuning-optimization
+
+4.  Launch and RDS and learn the basics
+----------------------------------------
+https://youtu.be/xzCgeRxSzy4?si=gwaMXYJgtlJv7BQIs

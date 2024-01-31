@@ -1,0 +1,56 @@
+1.Learn the fundamental concept of version control. Learn about the need for version control in software development.
+---------------------------------------------------------------------------------------------------------------------
+https://github.com/akramdevopstrainer/git/blob/main/GIT%20from%20scratch.pdf
+https://www.atlassian.com/git/tutorials/what-is-version-control
+
+2.Install git on your localhost and learn basic git commands. 
+-------------------------------------------------------------
+https://www.atlassian.com/git/glossary#commands
+
+-> mkdir xpayback
+  257  ll
+  258  clear
+  259  cd /opt/
+  260  sudo apt install git -y
+  261  cd ..
+  262  cd
+  263  which git
+  
+3.Create an account on the git hosting platform and push your code. 
+---------------------------------------------------------------------
+https://github.com/Rifaz15072000/xpayback
+
+264  git -v
+  265  git --version
+  266  clear
+  267  sudo su -
+  268  cd xpayback
+  269  vi code.txt
+  270  git init
+  271  git config --global user.name "rifaz"
+  272  git config --global user.email "mohammedrifaz859@gmail.com"
+  273  git status
+  274  git add .
+  275  git status
+  276  git log
+  277  git status
+  278  git branch -M main
+  279  git remote add origin https://github.com/Rifaz15072000/xpayback.git
+  280  git push -u origin main
+  281  git remote set-url origin https://github.com/Rifaz15072000/xpayback.git
+  282  git push -u origin main
+  283* git statu
+  284  history
+
+https://youtu.be/bc3_FL9zWWs?si=ihcJWE7PQhdwxrxu(its used to clone the file)
+
+if i have to clone, that is in master branch then u have to create a branch called master in ur repository and then u have to clone it..
+
+4.What are the security measures that can be done while using git
+------------------------------------------------------------------
+https://youtu.be/oPpnCh7InLY?si=EiJ6P_b1M-kH750s (branching, pull requests etc).
+https://youtu.be/rYwwz1b2Nss?si=G99_UywnFzKOKNxP (security measure for branching).
+https://snyk.io/blog/ten-git-hub-security-best-practices/
+https://www.gitguardian.com/glossary/what-are-github-security-best-practices
+
+
