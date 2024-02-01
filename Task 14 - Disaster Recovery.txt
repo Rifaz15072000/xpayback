@@ -1,0 +1,156 @@
+Task 14 - Disaster Recovery
+Learn backup and restore mechanisms
+High Availability (HA) and Failover
+What are the backup vendors available in the market?
+Cloud-Based Disaster Recovery
+------------------------------------------------------
+-> https://youtu.be/G3uYN5H9aAc?si=MZpAgv3Ah6j9FSdW
+-> https://cloudian.com/guides/disaster-recovery/disaster-recovery-5-key-features-and-building-your-dr-plan/
+
+Disaster Recovery
+Learn backup and restore mechanisms
+------------------------------------------
+Disaster recovery is a crucial aspect of information technology (IT) management. It involves preparing for and responding to events that may cause significant disruptions to normal business operations. Backup and restore mechanisms are key components of disaster recovery planning, helping organizations recover their data and systems in the event of data loss or system failure. Here's an overview of backup and restore mechanisms:
+
+Backup Types:
+-------------
+Full Backup: A complete copy of all selected data at a specific point in time. While it provides comprehensive recovery, it requires significant storage space and time.
+Incremental Backup: Only backs up data that has changed since the last backup (whether full or incremental). Incremental backups are faster and use less storage space, but restoring requires the latest full backup plus all subsequent incremental backups.
+Differential Backup: Similar to incremental backup, but it copies data that has changed since the last full backup. Restoring requires the latest full backup and the latest differential backup.
+Backup Strategies:
+
+3-2-1 Rule: Maintain three copies of your data, stored on two different media, with one copy stored offsite. This strategy helps ensure data availability in the event of various failures.
+Regular Scheduling: Perform backups regularly based on the criticality of data. Daily or hourly backups may be necessary for critical systems, while weekly or monthly backups may suffice for less critical data.
+Storage Media:
+
+On-site Storage: Devices like external hard drives, tape drives, or network-attached storage (NAS) located within the same premises.
+Off-site Storage: Cloud storage, remote data centers, or physical off-site locations provide protection against on-site disasters.
+Backup Software:
+
+Utilize backup software to automate and manage the backup process efficiently. Popular solutions include Veeam, Acronis, and Backup Exec.
+Testing:
+
+Regularly test your backup and restore processes to ensure data integrity and system recoverability. This helps identify potential issues before a real disaster occurs.
+Documentation:
+
+Maintain thorough documentation of your backup and restore procedures. This documentation should include details on the backup schedule, storage locations, and the process for restoring data.
+Disaster Recovery Plan:
+
+Integrate backup and restore mechanisms into a comprehensive disaster recovery plan. Identify critical systems, prioritize data, and establish clear procedures for recovering systems and data in the event of a disaster.
+Security Considerations:
+
+Implement encryption for data in transit and at rest to protect sensitive information during the backup process.
+By understanding and implementing these backup and restore mechanisms, organizations can enhance their disaster recovery capabilities and minimize the impact of potential disruptions to their IT infrastructure.
+------------------------------------------------------------------------------------------------------------------------
+
+High Availability (HA) and Failover
+--------------------------------------
+High Availability (HA) and failover are strategies used to ensure continuous and uninterrupted operation of systems and services. These concepts are particularly important in critical infrastructure and applications where downtime can have significant consequences. Let's explore High Availability and Failover:
+
+High Availability (HA):
+Definition:
+
+High Availability refers to the design and implementation of systems and services with the goal of minimizing downtime and ensuring continuous operation.
+Key Objectives:
+
+Redundancy: HA systems typically incorporate redundant components, such as servers, networks, and storage, to eliminate single points of failure.
+Reliability: Systems are designed to operate reliably over extended periods, minimizing the chances of failures.
+Fault Tolerance: HA systems can withstand hardware or software failures without a significant impact on overall operation.
+Components of HA:
+
+Load Balancing: Distributes network traffic or computing workload across multiple servers to ensure no single server is overwhelmed.
+Clustering: Grouping multiple servers together to work as a single logical unit, sharing the processing load and providing failover capabilities.
+Replication: Creating and maintaining identical copies of data or systems across multiple locations or servers.
+Redundancy:
+
+Hardware Redundancy: Duplicate hardware components (servers, storage, etc.) to eliminate single points of failure.
+Network Redundancy: Multiple network paths or connections to ensure continuous connectivity.
+Failover:
+Definition:
+
+Failover is the process of automatically or manually switching from a failed or inactive system or component to a backup or secondary system to maintain continuous operation.
+Types of Failover:
+
+Automated Failover: The system detects a failure and automatically switches to a redundant component without human intervention.
+Manual Failover: Requires human intervention to initiate the failover process.
+Failover Scenarios:
+
+Server Failover: In the event of a server failure, traffic is redirected to a backup server.
+Database Failover: Switching to a secondary database server in case the primary server fails.
+Network Failover: Routing traffic through alternative network paths in case of network component failure.
+Challenges and Considerations:
+
+Data Consistency: Ensuring that data remains consistent across primary and secondary systems.
+Failback Procedures: Once the primary system is restored, procedures for transitioning back to it need to be defined.
+Monitoring and Alerting: Continuous monitoring of system health and automated alerts to identify potential failures.
+Common Technologies:
+
+Virtualization: Enables the movement of virtual machines between physical servers to provide failover capabilities.
+Load Balancers: Distribute incoming network traffic across multiple servers to ensure no single server becomes a bottleneck.
+Both High Availability and Failover strategies are essential components of a comprehensive approach to system reliability and uptime. They are commonly employed in critical systems such as data centers, cloud services, and enterprise applications to ensure continuous operation even in the face of hardware or software failures.
+--------------------------------------------------------------------------------------------------------------------
+What are the backup vendors available in the market?
+----------------------------------------------------
+https://www.baculasystems.com/backup-vendors/
+
+These vendors provide a range of backup and recovery solutions for different environments, including physical, virtual, and cloud infrastructures. They may offer features such as data deduplication, replication, cloud integration, and support for various operating systems and applications. When choosing a backup vendor, it's important to consider factors like your specific requirements, the scale of your operations, and any industry-specific compliance needs. Additionally, keep in mind that the technology landscape evolves, and new solutions may have emerged since my last update.
+
+some backup vendors
+---------------------
+Rubrik
+Veeam
+Cohesity
+IBM
+DELL Backup
+Vembu
+Veritas
+NetApp
+Commvault
+Bacula Enterprise
+Zerto
+Druva
+Acronis
+NAKIVO
+MSP360
+---------------------------------------------------------------------------------------------------------------------
+
+Cloud-Based Disaster Recovery
+------------------------------
+https://www.techtarget.com/searchdisasterrecovery/definition/cloud-disaster-recovery-cloud-DR
+https://www.acronis.com/en-sg/blog/posts/cloud-based-dr/
+
+Cloud-Based Disaster Recovery (CBDR) refers to a strategy in which an organization leverages cloud computing resources to implement and facilitate its disaster recovery (DR) and business continuity plans. In traditional disaster recovery scenarios, organizations often maintain off-site physical locations or data centers to replicate and store critical data and applications. Cloud-Based Disaster Recovery, on the other hand, utilizes cloud services to store and recover data, run applications, and provide IT infrastructure in the event of a disaster.
+
+Key features of Cloud-Based Disaster Recovery include:
+
+Data Replication:
+
+Organizations replicate critical data and virtual machine images to the cloud. This ensures that in the event of a disaster, data is readily available for recovery.
+Virtualization:
+
+Cloud-Based Disaster Recovery often involves the use of virtualization technologies. Virtual machines and applications can be quickly spun up in the cloud to replace on-premises systems affected by a disaster.
+On-Demand Resources:
+
+Cloud platforms offer on-demand resources, allowing organizations to scale up or down based on their needs. This flexibility is valuable during disaster recovery scenarios when additional computing power or storage may be required temporarily.
+Cost-Efficiency:
+
+Cloud-Based Disaster Recovery eliminates the need for maintaining a secondary physical data center, resulting in potential cost savings. Organizations pay for cloud resources on a consumption basis, which can be more cost-effective than maintaining and operating a separate DR site.
+Automation and Orchestration:
+
+Automation tools and orchestration capabilities in the cloud allow for the automated and coordinated execution of recovery plans. This helps ensure that the recovery process is swift, consistent, and less prone to errors.
+Testing and Simulations:
+
+Cloud-Based Disaster Recovery enables organizations to conduct regular testing and simulations without impacting their production environments. This ensures that the DR plan is up-to-date and effective.
+Geographic Redundancy:
+
+Cloud providers typically have multiple data centers in different geographic regions. This built-in redundancy helps enhance the availability and resilience of cloud-based disaster recovery solutions.
+Remote Access:
+
+Cloud-based resources can be accessed remotely, allowing employees to continue their work even if the primary office or data center is inaccessible due to a disaster.
+Implementing Cloud-Based Disaster Recovery requires a well-designed plan that includes considerations for data replication, recovery point objectives (RPOs), recovery time objectives (RTOs), and testing procedures. It's essential to choose a reliable and secure cloud service provider and ensure that the selected cloud-based disaster recovery solution aligns with the organization's specific needs and compliance requirements.
+
+
+
+example for opensource backup system
+ Duplicity
+gpg

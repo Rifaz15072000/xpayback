@@ -1,0 +1,121 @@
+-> mytask was understnd DBMS and learn basic query commands.
+i watched some youtube videos and read some documents to know about DBMS.
+* I leart what is dbms, types of it. differences, versions.
+* I learnt Learn mysql tuning and what is the need for it. 
+* I installed postgresl server and created a database and learn the basic commands - listing, dump commands, import etc. 
+* I Launched RDS and learn the basics of it.
+with this i completed my dbms task.
+
+Then i moved to my next task that is version control system.
+------------------------------------------------------------
+* I learnt the fundamental concept of version control and then about the need for version control in software development.
+* I Installed git on my localhost and learn basic git commands.
+* Created an account on the git hosting platform and pushed my code.
+* I worked on cloning the file.
+and then i read some documents to understand the security measures that are used in git.
+with this i completed my git task.
+
+then i moved to FTP task
+------------------------
+* l learnt What is FTP and its Types.
+* I gone through the working of FTP.
+* I Configured my VSFTPD and uploaded a text file in it.
+* I gone through the working of Pure-ftpd.
+with this i completed my FTP task then i moved to next task that is
+
+scripting
+---------
+here i first watched some videos and read some documents to understand the basics of shell scripting.
+and then using some documents and chat gpt i was able to write the script for
+->To take dumps of all database regularly
+-> To start httpd or nginx service if it fails,
+-> To resync one directory from one server to another
+->  To do kernel updates monthly
+-> To take backup of domain files as tar daily
+and i used crontab to check the working of shell script and it was working properly.
+with this i completed my scripting task and then i moved to my next task that is.
+
+Disaster Recovery presentation
+-----------------------------
+Disaster recovery refers to the process of preparing for, responding to, and recovering from a significant and often unexpected event or disaster that could adversely impact an organization's business operations, data, and IT infrastructure. The goal of disaster recovery is to minimize downtime, data loss, and disruptions, allowing the organization to resume normal business activities as quickly and efficiently as possible after a disaster.
+
+backup and restore mechanisms
+------------------------------
+Backup and restore mechanisms are key components of disaster recovery planning, helping organizations recover their data and systems in the event of data loss or system failure.
+
+Backup Types:
+-------------
+1) Full Backup: A complete copy of all selected data at a specific point in time.
+2) 3-2-1 Rule: Maintain three copies of your data, stored on two different media, with one copy stored offsite.
+3) On-site Storage: Devices like external hard drives, tape drives, or network-attached storage (NAS) located within the same premises.
+4) Off-site Storage: Cloud storage, remote data centers, or physical off-site locations provide protection against on-site disasters.
+etc..
+
+By understanding and implementing these backup and restore mechanisms, organizations can enhance their disaster recovery capabilities and minimize the impact of potential disruptions to their IT infrastructure.
+
+High Availability (HA) and Failover
+----------------------------------
+High Availability (HA) and failover are strategies used to ensure continuous and uninterrupted operation of systems and services. These concepts are particularly important in critical infrastructure and applications where downtime can have significant consequences.
+
+High Availability refers to the design and implementation of systems and services with the goal of minimizing downtime and ensuring continuous operation.
+-----------------
+Key Objectives:
+-> Redundancy
+-> Load Balancing
+-> Reliability etc
+
+Failover is the process of automatically or manually switching from a failed or inactive system or component to a backup or secondary system to maintain continuous operation.
+Key Objectives:
+-> Automated Failover
+-> Server Failover
+-> Virtualization etc
+
+What are the backup vendors available in the market?
+----------------------------------------------------
+Rubrik
+Veeam
+Cohesity
+IBM
+DELL Backup
+Vembu
+Veritas
+NetApp
+Commvault
+Bacula Enterprise
+Zerto
+Druva
+Acronis
+NAKIVO
+MSP360 etc
+
+Cloud-Based Disaster Recovery
+-------------------------------
+Cloud-Based Disaster Recovery (CBDR) refers to a strategy in which an organization leverages cloud computing resources to implement and facilitate its disaster recovery (DR) and business continuity plans.  Cloud-Based Disaster Recovery, utilizes cloud services to store and recover data, run applications, and provide IT infrastructure in the event of a disaster.
+Key features of Cloud-Based Disaster Recovery include:
+-----------------------------------------------------
+Data Replication:
+----------------
+Organizations replicate critical data and virtual machine images to the cloud. This ensures that in the event of a disaster, data is readily available for recovery.
+Virtualization:
+----------------
+Cloud-Based Disaster Recovery often involves the use of virtualization technologies. Virtual machines and applications can be quickly spun up in the cloud to replace on-premises systems affected by a disaster.
+On-Demand Resources:
+--------------------
+Cloud platforms offer on-demand resources, allowing organizations to scale up or down based on their needs. This flexibility is valuable during disaster recovery scenarios when additional computing power or storage may be required temporarily.
+Cost-Efficiency:
+----------------
+Cloud-Based Disaster Recovery eliminates the need for maintaining a secondary physical data center, resulting in potential cost savings. Organizations pay for cloud resources on a consumption basis, which can be more cost-effective than maintaining and operating a separate DR site.
+etc..
+
+
+
+
+
+
+
+
+
+
+
+
+
